@@ -1,0 +1,84 @@
+<Boxes>:
+
+    canvas:
+        Color:
+            rgba: 47/255, 59/255, 82/255, 1
+
+        Rectangle:
+            pos: root.width * 5/500, root.height * 5/300
+            size: root.width * 490/500, root.height * 125/300
+
+        Color:
+            rgba: 27/255, 36/255, 52/255, 1
+
+        Rectangle:
+            pos: root.width * 12/500, root.height * 12/300
+            size: root.width * 476/500, root.height * 111/300
+
+
+    BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+
+        FloatLayout:
+
+		    GridLayout:
+		        cols: 2
+		        pos_hint: {'x': 5/500, 'y': 1 - 159/300}
+                size_hint: 490/500, 50/300
+                background_normal: ''
+
+                spacing:5
+
+
+                Button:
+                    id: Predict
+                    text: 'Predict'
+                    color: {'normal': (173/255, 191/255, 220/255, 1), 'down': (1, 1, 1, 1)} [self.state]
+                    canvas.before:
+                        Color:
+                            rgba: {'normal': (45/255, 158/255, 194/255, 1), 'down': (0, 0, 0, 1)} [self.state]
+                        Line:
+                            width: {'normal': 1.2, 'down': 0.6} [self.state]
+                            rectangle: self.x, self.y, self.width, self.height
+                    background_normal: ''
+                    background_color: {'normal': (27/255, 36/255, 52/255, 1), 'down': (227/255, 246/255, 240/255, 1)} [self.state]
+                    on_press: root.predict()
+
+
+                Button:
+                    id: GenerateRandom
+                    text: 'Generate\nRandom'
+                    color: {'normal': (173/255, 191/255, 220/255, 1), 'down': (1, 1, 1, 1)} [self.state]
+                    canvas.before:
+                        Color:
+                            rgba: {'normal': (45/255, 158/255, 194/255, 1), 'down': (0, 0, 0, 1)} [self.state]
+                        Line:
+                            width: {'normal': 1.2, 'down': 0.6} [self.state]
+                            rectangle: self.x, self.y, self.width, self.height
+                    background_normal: ''
+                    background_color: {'normal': (27/255, 36/255, 52/255, 1), 'down': (227/255, 246/255, 240/255, 1)} [self.state]
+                    on_press: root.generate_random()
+
+    BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+
+        FloatLayout:
+
+            TextInput:
+                id: input
+                hint_text:'Enter Message'
+                pos_hint: {'x': 5/500, 'y': 200/300}
+                size_hint: 490/500, 95/300
+                on_text: root.process()
+
+
+    RelativeLayout:
+        Label:
+            id: pred_text
+            pos: root.width * 68/500, root.height * 20/300
+            text_size: self.width*2, self.height
+            halign: 'left'
+            valign: 'top'
+            text: '-'
